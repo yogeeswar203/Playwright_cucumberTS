@@ -1,0 +1,1 @@
+[{"uid":"c267e9ff81003294","name":"Verify user is able to login ORM","time":{"start":1788712083902,"stop":1788712091306,"duration":7404},"status":"passed","severity":"normal"},{"uid":"dc9050c6312def28","name":"Verify user is able to login to Orange HRM site successfully","time":{"start":1788712078300,"stop":1788712083866,"duration":5566},"status":"passed","severity":"normal"}]

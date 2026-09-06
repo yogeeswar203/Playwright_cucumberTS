@@ -1,12 +1,15 @@
 import {Given, When, Then} from "@cucumber/cucumber";
 import { loginPagehrm } from "../../pageObjects/loginPage";
 import { pageFixture } from "../../hooks/pageFixers";
+import { homepagehrm  } from "../../pageObjects/homepageObjects";
 
 let lpr:loginPagehrm;
+let hm:homepagehrm;
 
 Given('I navigate to the OrangeHRM login pages', async function () {
   // Write code here that turns the phrase above into concrete actions
   lpr = new loginPagehrm(pageFixture.page);
+  hm = new homepagehrm(pageFixture.page);
   await lpr.navigateTologin();
   console.log("Naviagted to home page")
   
@@ -31,5 +34,5 @@ When('I click on the submit button', async function () {
 
 Then('I should be successfully logged in and redirected to the dashboard test', async function () {
   // Write code here that turns the phrase above into concrete actions
-  console.log("Logged in")
+  hm.getHomePageText();
 });

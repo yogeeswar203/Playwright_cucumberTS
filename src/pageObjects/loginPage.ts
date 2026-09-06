@@ -34,23 +34,28 @@ export class loginPagehrm{
 
     async enterUsername(data:string)
     {
+        await this.page.waitForLoadState('networkidle');
         await this.usernametxt.clear();
         await this.usernametxt.fill(data);
     }
 
     async enterpassword(data:string)
     {
+        await this.page.waitForLoadState('networkidle');
         await this.passwordtxt.clear();
         await this.passwordtxt.fill(data);
     }
 
     async clickonLoginbtn(){
         await this.loginbtn.click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     async navigateTologin()
     {
-        await this.page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+        
+        await this.page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        await this.page.waitForLoadState('networkidle');
     }
 
     

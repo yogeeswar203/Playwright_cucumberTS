@@ -10,6 +10,7 @@ let page: Page;
 Given('I navigate to the OrangeHRM login page', async function () {
   // Write code here that turns the phrase above into concrete actions
   await pageFixture.page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+  await pageFixture.page.waitForLoadState('networkidle');
 
 });
 
