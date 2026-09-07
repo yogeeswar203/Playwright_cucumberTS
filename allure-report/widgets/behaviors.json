@@ -1,1 +1,1 @@
-{"total":2,"items":[{"uid":"3392c466a8e489d85a7f38739f6876ac","name":"OrangeHRM Login Functionality","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}},{"uid":"e7f99722a48bfd7722b43e0bfd7a7d08","name":"OrangeHRM Login Functionality test","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
+{"total":1,"items":[{"uid":"9d325ce018aeb68a226ca87f4648cece","name":"PIM Employee Management","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}

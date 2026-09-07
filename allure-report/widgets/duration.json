@@ -1,1 +1,1 @@
-[{"uid":"c267e9ff81003294","name":"Verify user is able to login ORM","time":{"start":1788712083902,"stop":1788712091306,"duration":7404},"status":"passed","severity":"normal"},{"uid":"dc9050c6312def28","name":"Verify user is able to login to Orange HRM site successfully","time":{"start":1788712078300,"stop":1788712083866,"duration":5566},"status":"passed","severity":"normal"}]
+[{"uid":"5a1d92c84db605f9","name":"Add a new employee with only mandatory fields","time":{"start":1788799210491,"stop":1788799235919,"duration":25428},"status":"passed","severity":"normal"}]

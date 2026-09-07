@@ -1,5 +1,4 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","7404","Verify user is able to login ORM","","2026-09-06","passed","2026-09-06","","","",""
-"As a registered user of OrangeHRM,
-  I want to be able to log in to my account,
-  So that I can access my employee dashboard.","5566","Verify user is able to login to Orange HRM site successfully","","2026-09-06","passed","2026-09-06","","","",""
+"As an HR Administrator
+  I want to manage employee records within the PIM module
+  So that the company maintains an accurate and up-to-date employee directory","25428","Add a new employee with only mandatory fields","","2026-09-07","passed","2026-09-07","","","",""

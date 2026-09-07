@@ -13,7 +13,7 @@ BeforeAll(async function () {
 });
 
 AfterAll(async function () {
-    await page.waitForTimeout(10000);
+    await page.waitForTimeout(3000);
     const envDetails = `
     
 Browser=Chrome

@@ -18,16 +18,20 @@ export class loginPagehrm{
     async enterText(locator:Locator, data:string){
         await locator.clear();
         await locator.fill(data);
+        await this.page.waitForLoadState('networkidle');
     }
 
     async clickOnlinkbtn(locator:Locator){
+        this.page.waitForLoadState('load');
         await locator.click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     async userLogin(username:string, password:string){
         await this.enterText(this.usernametxt, username);
         await this.enterText(this.passwordtxt, password);
         await this.clickOnlinkbtn(this.loginbtn);
+        await this.page.waitForLoadState('networkidle')
 
 
     }

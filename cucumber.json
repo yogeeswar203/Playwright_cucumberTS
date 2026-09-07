@@ -1,12 +1,14 @@
-{
+ {
     "default":{
+        "tags":"@pim",
         "formatOptions":{
-            "tags":"@smoke",
+            
             "snippetInterface":"async-await",
             "resultsDir": "allure-results"
         },
+
         "paths":[
-            "src/test/features"
+            "src/test/features/"
             
         ],
         "publishQuiet":true,
