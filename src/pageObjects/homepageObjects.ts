@@ -1,29 +1,36 @@
 import {test, expect, Locator, Page} from "@playwright/test";
-import {pageFixture} from "../hooks/pageFixers";
+import {pageFixture as pf} from "../hooks/pageFixers";
 import { loginPagehrm } from "./loginPage";
 
-let lpr:loginPagehrm;
+let lp:loginPagehrm;
 
 
 
 export class homepagehrm{
     private readonly page;
     private readonly dashboard_txt;
-    private readonly pim_link;
-    private readonly moduleName:any;
+    private readonly addemp_link;
+    //private readonly pim_link;
+    private readonly leaveDashboard_txt;
+    private readonly leavePage_link;
     
 
     constructor(page:Page)
     {
-        this.page=page;
-        this.dashboard_txt= this.page.locator("h6:has-text('Dashboard')");
-        this.pim_link = this.page.locator("a span:has-text('PIM')");
-        this.moduleName;
+        this.page=pf.page;
+        this.dashboard_txt= pf.page.locator("h6:has-text('Dashboard')");
+        //this.pim_link = this.page.locator("a span:has-text('PIM')");
+        this.addemp_link = pf.page.locator("a:has-text('Add Employee')");
+        this.leaveDashboard_txt = pf.page.locator("h6:has-text('Leave')");
+        this.leavePage_link = pf.page.locator("a span:has-text('Leave')");
+
+
         
     }
 
     async getText(locator:Locator)
     {
+        await expect(locator).toBeEnabled();
         const text = await locator.textContent();
         await this.page.waitForLoadState('networkidle');
         return text;
@@ -31,17 +38,10 @@ export class homepagehrm{
 
     async getHomePageText(){
         const msg = await this.getText(this.dashboard_txt);
-        console.log(msg);
+        return msg;
     }
 
-    async navigateToPIM()
-    {
-        lpr = new loginPagehrm(pageFixture.page);
-        await lpr.clickOnlinkbtn(this.pim_link);
-        await this.page.waitForLoadState('networkidle');
-    }
-
-    async navigateToAnylink(portalName:string)
+    async navigateToAnyModule(portalName:string)
     {
         const dynamicLocatorLink = `a span:has-text('${portalName}')`;
         const linkLocator = this.page.locator(dynamicLocatorLink);
@@ -51,5 +51,23 @@ export class homepagehrm{
         
     }
 
+    async clickOnAddEmployee()
+    {
+        lp = new loginPagehrm(pf.page);
+        await lp.user_click(this.addemp_link);
+        await lp.ideal();
+    }
 
+    async getLeaveDashboardText(){
+        const leaveDashboard_text = await this.getText(this.leaveDashboard_txt);
+        return leaveDashboard_text;
+
+    }
+
+
+     async clickOnLeaveTab(){
+        lp = new loginPagehrm(pf.page);
+        await lp.user_click(this.leavePage_link);
+        lp.ideal();
+    }
 }

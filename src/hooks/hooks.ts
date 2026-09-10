@@ -1,19 +1,30 @@
-import {Before, BeforeAll, After, AfterAll, Status, AfterStep} from '@cucumber/cucumber'
-import {chromium, Browser, Page} from '@playwright/test';
+import {Before, BeforeAll, After, AfterAll, AfterStep } from '@cucumber/cucumber'
+import {chromium, Browser,  BrowserContext} from '@playwright/test';
 import {pageFixture} from './pageFixers';
 import * as fs from 'fs';
 
-let page:Page;
-let browser:Browser;
 
-BeforeAll(async function () {
-    browser = await chromium.launch({headless:false});
-    page = await browser.newPage();
+let browser:Browser;
+let context: BrowserContext;
+
+BeforeAll(async function(){
+  browser = await chromium.launch({headless:false});
+
+});
+
+AfterAll(async function(){
+
+  await browser.close();
+})
+
+Before(async function () {
+    context = await browser.newContext();
+    const page = await browser.newPage();
     pageFixture.page = page;
 });
 
-AfterAll(async function () {
-    await page.waitForTimeout(3000);
+After(async function () {
+    
     const envDetails = `
     
 Browser=Chrome
@@ -26,18 +37,18 @@ Execution_Time=${new Date().toLocaleString()}
   fs.writeFileSync('allure-results/environment.properties', envDetails.trim());
     
 
-  await page.close();
-  await browser.close();
+  await pageFixture.page.close();
+  await context.close();
 })
 
 AfterStep(async function (scenario) 
 {
    // Because we removed the 'if' condition, this runs for Passed AND Failed tests
-  if (page) {
+  if (pageFixture.page) {
     const screenshot = await pageFixture.page.screenshot({ fullPage: true });
     this.attach(screenshot, 'image/jpeg');
   } else {
     console.error("Page object is undefined. Check your Before hook.");
   }
-})
+});
 

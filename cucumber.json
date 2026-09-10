@@ -1,20 +1,17 @@
  {
     "default":{
-        "tags":"@pim",
+        "tags":"",
         "formatOptions":{
             
             "snippetInterface":"async-await",
             "resultsDir": "allure-results"
         },
-
-        "paths":[
-            "src/test/features/"
-            
-        ],
+        "paths":[ ],
         "publishQuiet":true,
-        "dryrun":true,
-        "require":["src/test/steps/*ts",
-        "src/hooks/hooks.ts"
+        "dryrun":false,
+        "require":[
+            "src/test/steps/*.ts",
+            "src/hooks/hooks.ts"
     ],
         "requireModule":["ts-node/register"],
         "format":

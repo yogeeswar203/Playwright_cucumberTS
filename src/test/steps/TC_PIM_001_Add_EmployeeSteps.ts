@@ -1,57 +1,43 @@
-import {Given, When, Then} from "@cucumber/cucumber";
+import { When, setDefaultTimeout, Then } from "@cucumber/cucumber";
+import {pageFixture, pageFixture as pf} from "../../hooks/pageFixers"
 import { loginPagehrm } from "../../pageObjects/loginPage";
-import { pageFixture } from "../../hooks/pageFixers";
-import { homepagehrm  } from "../../pageObjects/homepageObjects";
-import {pimPageObjects} from "../../pageObjects/PIMObjects";
+import { homepagehrm } from "../../pageObjects/homepageObjects";
+import { expect } from "@playwright/test";
 
-let lpr:loginPagehrm;
-let hm:homepagehrm;
-let pim:pimPageObjects;
+setDefaultTimeout(60*1000);
+let lp:loginPagehrm;
+let hp: homepagehrm;
+
+When("User is able to navigate to LoginPage", async function(){
+    // Object creating for the login and Home page
+    lp = new loginPagehrm(pf.page);
+    hp = new homepagehrm(pf.page);
+
+    await lp.navigateToLoginPage();
 
 
-
-Given('I am logged into OrangeHRM as {string} with password {string}', async function (username:string, password:string ) {
-  // Write code here that turns the phrase above into concrete actions
-  lpr = new loginPagehrm(pageFixture.page);
-  hm = new homepagehrm(pageFixture.page);
-  pim = new pimPageObjects(pageFixture.page);
-  await lpr.navigateTologin();
-  await lpr.userLogin(username,password);
-  
 });
 
+Then("User able to enter username as {string} and password as {string}", async function(username, password){
+    await lp.adminuserLogin(username, password);
 
-Given("I navigate to the {string} module page", async function (panelName:string) {
-    //console.log(panelName);
-    await hm.navigateToAnylink(panelName);
-  
-});
-
-When("I click on the Add Employee button", async function(){
-    await pim.clickonAddemp();
     
 });
 
-When ("I enter {string} into the First Name field", async function(firstName:string){
-  await pim.eneterFirstName(firstName);
+Then("User is able to navigate to home successfully", async function(){
+    const homepage_txt = await hp.getHomePageText();
+    //console.log("The Home message",homepage_txt);
+     await expect(homepage_txt).toBe("Dashboard");
+
+   
 });
 
-When ("I enter {string} into the Middle Name field", async function(middleName:string){
-  await pim.eneterMiddleName(middleName);
+Then ("User navigate to {string} page", async function(moduleName)
+{
+       await hp.navigateToAnyModule(moduleName);
 });
 
-When ("I enter {string} into the Last Name field", async function(lastName:string){
-  await pim.eneterLastName(lastName);
-});
-
-When ("I leave the {string} field as auto-generated", async function(empID:string){
-  await pim.eneterempId(empID);
-});
-
-When ("I click the Save button", async function(){
-  await pim.clickOnSavebtn();
+Then ("user click on Add employee", async function(){
+    await hp.clickOnAddEmployee();
 })
 
-Then ("I should be redirected to the employee's Personal Details page",async function(){
-  await pim.getpersonalDetailsText();
-})

@@ -1,4 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"As an HR Administrator
-  I want to manage employee records within the PIM module
-  So that the company maintains an accurate and up-to-date employee directory","25428","Add a new employee with only mandatory fields","","2026-09-07","passed","2026-09-07","","","",""

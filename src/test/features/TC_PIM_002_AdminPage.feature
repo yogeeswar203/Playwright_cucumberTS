@@ -8,8 +8,7 @@ Feature: PIM Employee Management
     And User is able to navigate to home successfully
 
   Scenario:
-    When User navigate to "Leave" page
-    And user click on Add employee
-    
+    When User navigate to leave page
+    Then User is able to see leave dashboard
 
  

@@ -1,67 +1,66 @@
 import {test, expect, Page, Locator} from "@playwright/test";
-import { pageFixture } from "../hooks/pageFixers";
+import { pageFixture as pf } from "../hooks/pageFixers";
+import { setDefaultTimeout } from "@cucumber/cucumber";
+setDefaultTimeout(60*1000);
+let logInPageURL = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
 export class loginPagehrm{
     private readonly page;
     private readonly usernametxt;
     private readonly passwordtxt;
     private readonly loginbtn;
+    
+
 
     constructor (page:Page)
     {
-        this.page = page;
-        this.usernametxt = this.page.locator("input[name='username']");
-        this.passwordtxt = this.page.locator("input[name='password']");
-        this.loginbtn = this.page.locator("button[type='submit']");
-    }
-
-    async enterText(locator:Locator, data:string){
-        await locator.clear();
-        await locator.fill(data);
-        await this.page.waitForLoadState('networkidle');
-    }
-
-    async clickOnlinkbtn(locator:Locator){
-        this.page.waitForLoadState('load');
-        await locator.click();
-        await this.page.waitForLoadState('networkidle');
-    }
-
-    async userLogin(username:string, password:string){
-        await this.enterText(this.usernametxt, username);
-        await this.enterText(this.passwordtxt, password);
-        await this.clickOnlinkbtn(this.loginbtn);
-        await this.page.waitForLoadState('networkidle')
-
-
-    }
-
-    async enterUsername(data:string)
-    {
-        await this.page.waitForLoadState('networkidle');
-        await this.usernametxt.clear();
-        await this.usernametxt.fill(data);
-    }
-
-    async enterpassword(data:string)
-    {
-        await this.page.waitForLoadState('networkidle');
-        await this.passwordtxt.clear();
-        await this.passwordtxt.fill(data);
-    }
-
-    async clickonLoginbtn(){
-        await this.loginbtn.click();
-        await this.page.waitForLoadState('networkidle');
-    }
-
-    async navigateTologin()
-    {
+        this.page = pf.page;
+        this.usernametxt = pf.page.locator("input[name='username']");
+        this.passwordtxt = pf.page.locator("input[name='password']");
+        this.loginbtn = pf.page.locator("button[type='submit']");
         
-        await this.page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        await this.page.waitForLoadState('networkidle');
     }
 
+    async navigateToLoginPage()
+    {
+        await pf.page.goto(logInPageURL);
+        await pf.page.waitForTimeout(2000);
+        await this.ideal();
+    }
+    async adminuserLogin(username:string, password:string)
+    {
+        await this.enterText(this.usernametxt,username);
+        await this.enterText(this.passwordtxt,password);
+        await this.user_click(this.loginbtn);
+        await this.ideal();
+        
+    }
+
+
+
+    // Re-usable methods
+
+    async enterText(locator:Locator, data:string)
+    {
+        await locator.fill(data);
+        await pf.page.waitForLoadState("networkidle");
+
+    }
+
+    async user_click(locator:Locator)
+    {
+        await expect(locator).toBeEnabled();
+        await locator.click();
+        await pf.page.waitForLoadState("networkidle");
+    }
+
+    async ideal()
+    {
+        await pf.page.waitForLoadState("networkidle");
+    }
+
+   
+
+   
     
 }
-
