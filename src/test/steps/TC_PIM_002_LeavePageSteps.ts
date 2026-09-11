@@ -18,5 +18,6 @@ Then ("User is able to see leave dashboard", async function(){
     
     let LeaveText = await hp.getLeaveDashboardText();
     console.log(`User is able to navigate to ${LeaveText} page succesfully`);
+    
 })
 

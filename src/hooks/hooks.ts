@@ -49,6 +49,9 @@ AfterStep(async function (scenario)
     this.attach(screenshot, 'image/jpeg');
   } else {
     console.error("Page object is undefined. Check your Before hook.");
-  }
+  };
+
+
+
 });
 
